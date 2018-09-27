@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- spring 基本配置文件 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 使用Bean标签声明一个对象 -->
+	<!-- 使用bean标签，默认生成单例对象，如果想每次都new一个新的，需要将scope改为prototype -->
+	<bean id="x1" class="kohgylw.QuickStart_18081J.mc.XiangShengActor"
+		scope="prototype">
+		<!-- collaborators and configuration for this bean go here -->
+		<!-- s使用proprty标签给对象赋值 -->
+		<property name="name" value="郭德纲"></property>
+		<property name="style" value="对口相声"></property>
+		<!-- spring的赋值功能，极其强大，可以对任何基本类型及字符串进行智能赋值 -->
+		<property name="age" value="30"></property>
+		<property name="shifu" ref="x2"></property>
+		<!-- 对一个数组赋值 -->
+		<property name="baocaiming">
+			<array>
+				<value>蒸花鸭</value>
+				<value>蒸羊羔</value>
+				<value>烧子鹅</value>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="x2" class="kohgylw.QuickStart_18081J.mc.XiangShengActor">
+		<property name="name" value="金三胖"></property>
+		<property name="style" value="群口相声"></property>
+	</bean>
+
+	<!-- 生成一个构造器有参数的对象 -->
+	<bean id="tom" class="kohgylw.QuickStart_18081J.mc.Cat">
+		<constructor-arg index="0" value="汤姆"></constructor-arg>
+	</bean>
+	
+	<!-- 通过自动包扫描直接将一个包内的所有类加入到IOC容器，以默认构造器生成且不注入任何属性 -->
+	<context:component-scan base-package="kohgylw.QuickStart_18081J.service"></context:component-scan>
+
+</beans>
